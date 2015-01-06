@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+
+	<jaxrs:server id="postCheckCnResource" address="/">
+		<jaxrs:serviceBeans>
+			<ref bean="postCheckCnResourceImpl" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+
+	<bean id="postCheckCnResourceImpl" class="jp.opensquare.sandbox.cxf.jaxrs.provider.PostCheckCnResourceImpl" />
+
+	<jaxws:endpoint id="postCheckCnResourceWs"
+		implementor="jp.opensquare.sandbox.cxf.jaxrs.provider.PostCheckCnResourceImpl"
+		address="/PostCheckCnService" />	
+	
+</beans>
